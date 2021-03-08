@@ -1,0 +1,19 @@
+name = input('Enter file: ')
+handle = open(name)
+
+mcount = None
+mword = None
+counts = dict()
+for line in handle:
+    if not line.startswith('From ') or len(line) < 2: continue
+    words = line.split()
+    wordss = words[1:2] 
+    
+    for word in wordss:
+        counts[word] = counts.get(word,0) + 1
+    for word,count in counts.items():
+        if mcount is None or count > mcount:
+            mword = word
+            mcount = count
+
+print(mword, mcount)
